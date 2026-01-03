@@ -1,23 +1,408 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      background-color: #f7f9fc; /* Soft background color */
+    }
+    header, section, footer {
+      padding: 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+    /* Header Styling */
+    header {
+      background-color: #e3f2fd; /* Light blue header */
+      text-align: center;
+      padding: 60px 20px;
+      border-bottom: 5px solid #a8d5e5;
+    }
+    header h1 {
+      color: #0d47a1; /* Darker blue heading */
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: #333;
+      font-size: 1.1em;
+      margin-top: 0;
+    }
+    /* Call to Action Button */
+    .cta-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #4caf50; /* Softer green */
+      color: #fff;
+      font-size: 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 25px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .cta-btn:hover {
+      background-color: #43a047;
+      transform: translateY(-2px);
+    }
+    /* Section Styling */
+    section {
+      background-color: #ffffff;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 30px;
+    }
+    section h2 {
+      color: #0d47a1;
+      font-size: 1.8em;
+      border-bottom: 3px solid #e0e0e0;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    section h3 {
+      color: #3f51b5; /* Slightly different blue for subsections */
+      font-size: 1.4em;
+      margin-top: 25px;
+      margin-bottom: 15px;
+    }
+    /* Text Emphasis */
+    .highlight {
+      background-color: #fffde7;
+      padding: 3px 5px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+    /* List Styling */
+    ul, ol { padding-left: 20px; margin-bottom: 20px; }
+    ul li, ol li { margin-bottom: 10px; line-height: 1.6; }
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95em;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f8e9; /* Light green/beige heading */
+      font-weight: bold;
+      color: #388e3c;
+    }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+    tr:hover { background-color: #f0f4f7; }
+    /* Form Styling (Engagement elements) */
+    .form-group {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: #fafafa;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+    }
+    .form-group input[type="text"], .form-group textarea, .form-group select {
+      width: calc(100% - 22px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    .form-group input[type="radio"], .form-group input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    /* Footer Styling */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9em;
+    }
+    footer a {
+      color: #a8d5e5;
+      text-decoration: none;
+    }
+    /* Utility Classes */
+    .text-center { text-align: center; }
+    .mb-3 { margin-bottom: 15px; }
+    .mt-4 { margin-top: 20px; }
+    .data-box {
+        background-color: #e8f5e9;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .data-box p { font-size: 1.1em; font-weight: bold; color: #1b5e20; }
+    .external-links ul { list-style: none; padding-left: 0; }
+    .external-links li { margin-bottom: 10px; }
+    .external-links li a { color: #007bff; text-decoration: none; font-weight: bold; }
+  </style>
+
+  <!-- Schema Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "headline": "실비보험 만기 대처법 | 2026년 실손보험 갱신·재가입 완전 정복 가이드",
+    "description": "실비보험 만기가 다가오면 갱신해야 할까요? 2026년 4세대 실손보험 재가입, 유병력자 실비보험까지, 만기 시점별 최적의 선택 전략을 제공합니다.",
+    "url": "https://example.com/actual-loss-insurance-expiration",
+    "mainEntity": {
+      "@type": "Article",
+      "articleBody": "실비보험 만기 시점은 많은 분들이 고민하는 순간입니다. 단순히 갱신을 하는 것이 아니라, 변화된 환경에 맞춰 재가입을 고려해야 할 수도 있기 때문입니다. 특히 2026년에는 실손보험 시장의 변화가 예상되므로, 미리 준비하는 것이 중요합니다.",
+      "author": {
+        "@type": "Organization",
+        "name": "실비보험 전문가 그룹"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "보험 정보 센터",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://example.com/logo.png"
+        }
+      },
+      "datePublished": "2026-01-01"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>실비보험 만기, 2026년 당신의 선택은?</h1>
+    <p>실손보험 갱신 vs 재가입, 만기 시점별 최적의 전략을 위한 완벽 가이드</p>
+    <a href="#consultation" class="cta-btn">📞 실비보험 만기 전문가와 무료 상담하기</a>
+  </header>
+
+  <section id="introduction">
+    <h2>실비보험 만기 시점의 이해와 중요성</h2>
+    <p>실비보험(실손의료비보험)은 대한민국 국민 대다수가 가입하고 있는 필수 보험 상품입니다. 하지만 실비보험은 일반적인 종신보험이나 정기보험과 달리 <span class="highlight">갱신형 상품</span>으로, 일정 기간마다 보험료가 변동되며 일정 주기가 되면 만기(재가입 주기가 도래)됩니다. 특히 2026년은 1세대 실비보험 가입자들이 15년 만기 시점에 도달하는 경우가 많아, 실비보험 만기에 대한 관심이 급증하고 있습니다.</p>
+    <p>만기가 다가올 때 단순히 기존 보험을 유지할지, 새로운 상품으로 갈아탈지 고민하는 것은 매우 중요합니다. 이는 갱신 거절 가능성, 보험료 인상 폭, 그리고 4세대 실손보험으로의 전환 여부 등 여러 변수를 고려해야 하기 때문입니다.</p>
+
+    <h3>실비보험 만기 시점에 고려해야 할 핵심 키워드</h3>
+    <ul>
+      <li><span class="highlight">재가입 주기(만기) vs. 갱신 주기:</span> 실비보험은 통상 1년 단위로 보험료가 갱신되며, 15년 주기로 재가입이 이루어집니다. 이 재가입 시점에 계약을 이어갈지, 새로운 계약을 할지 결정해야 합니다.</li>
+      <li><span class="highlight">4세대 실손보험:</span> 2021년 7월 출시된 4세대 실손보험은 기존 세대와 보장 내용 및 보험료 산정 방식에 큰 차이가 있습니다. 만기 시점에 4세대로의 전환을 고려하는 것이 일반적입니다.</li>
+      <li><span class="highlight">유병력자 실손보험:</span> 건강 상태가 악화되어 만기 시점에 새로운 가입이 어려운 경우를 위한 대안입니다.</li>
+      <li><span class="highlight">보험료 인상률:</span> 만기 시점에 다가설수록 누적된 갱신으로 인해 보험료 부담이 커질 수 있습니다.</li>
+    </ul>
+  </section>
+
+  <section id="options">
+    <h2>만기 시 선택의 기로: 갱신 vs. 재가입 vs. 전환</h2>
+    <p>실비보험 만기 시점은 가입자가 세 가지 주요 선택지 중 하나를 결정해야 하는 중요한 순간입니다. 각 선택지의 장단점과 고려사항을 자세히 살펴보겠습니다.</p>
+
+    <h3>1. 기존 상품으로 재가입 (갱신)</h3>
+    <p>대부분의 실비보험 상품은 재가입 주기가 되면 기존의 계약 내용을 바탕으로 자동 재가입이 진행됩니다. 이는 가장 간편한 방법이지만, 몇 가지 주의사항이 있습니다.</p>
+    <ul>
+      <li><strong>장점:</strong> 건강 상태에 관계없이 재가입이 가능합니다. 특히 1세대 실비보험 가입자는 보장 내용이 우수하므로, 건강이 좋지 않아 4세대 가입이 어려운 경우 기존 상품을 유지하는 것이 유리할 수 있습니다.</li>
+      <li><strong>단점:</strong> 재가입 시점의 보험료는 갱신 주기를 거치며 누적된 인상분으로 인해 상당히 높아질 수 있습니다. 또한, 재가입 시점의 약관에 따라 보장 내용이 변경될 수도 있습니다 (예: 일부 특약 삭제).</li>
+    </ul>
+
+    <h3>2. 4세대 실손보험으로 전환</h3>
+    <p>만기 시점에 1~3세대 실비보험을 해지하고 4세대 실손보험으로 신규 가입하는 것을 의미합니다. 4세대 실손보험은 기존 세대보다 보험료가 저렴하다는 장점이 있습니다.</p>
+    <ul>
+      <li><strong>장점:</strong>
+        <ul>
+          <li><strong>저렴한 보험료:</strong> 4세대 실손보험은 비급여 항목에 대한 자기부담금이 높아지는 대신, 보험료가 저렴합니다. 특히 젊은 층이나 병원 이용이 적은 가입자에게 유리합니다.</li>
+          <li><strong>보험료 할인 혜택:</strong> 4세대 실손보험은 비급여 진료를 받지 않으면 다음 해 보험료가 할인되는 인센티브 구조를 가지고 있습니다.</li>
+        </ul>
+      </li>
+      <li><strong>단점:</strong>
+        <ul>
+          <li><strong>보장 축소:</strong> 기존 세대 실비보험에 비해 비급여 항목의 자기부담률이 높습니다. 예를 들어, 도수치료나 비급여 주사료에 대한 보장이 약해질 수 있습니다.</li>
+          <li><strong>신규 심사:</strong> 재가입이 아닌 신규 가입이기 때문에, 전환 시점에 건강 심사를 다시 받아야 합니다. 만기 이전에 질병 이력이 있는 경우, 가입이 거절되거나 일부 질환이 보장에서 제외될 수 있습니다.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>3. 유병력자 실손보험 가입</h3>
+    <p>만기 시점에 건강 악화로 인해 일반 4세대 실손보험 가입 심사를 통과하기 어려운 경우 고려할 수 있는 상품입니다. <span class="highlight">유병력자 실손보험</span>은 가입 심사 기준을 완화하여 만성 질환이 있는 사람도 가입할 수 있도록 합니다.</p>
+    <ul>
+      <li><strong>특징:</strong> 일반 실손보험보다 보험료가 비싸고 자기부담률이 높지만, 보장 공백을 메울 수 있는 유일한 대안이 될 수 있습니다.</li>
+    </ul>
+  </section>
+
+  <section id="comparison">
+    <h2>실비보험 세대별 비교 분석 (1세대 vs. 4세대)</h2>
+    <p>실비보험 만기 시점에 가장 큰 고민은 기존 1~3세대 상품과 4세대 상품 중 어떤 것을 선택할지입니다. 2026년 기준으로 각 세대별 특징을 비교하여 자신의 상황에 맞는 최적의 선택을 찾아보세요.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>1세대 실손보험 (2009년 8월 이전)</th>
+          <th>4세대 실손보험 (2021년 7월 이후)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>재가입 주기</strong></td>
+          <td>상품에 따라 15년 만기</td>
+          <td>5년 만기 (재가입 시점)</td>
+        </tr>
+        <tr>
+          <td><strong>보장 범위</strong></td>
+          <td>입원, 통원, 처방조제비, 비급여 항목 보장 (자기부담금 5~10% 수준)</td>
+          <td>입원, 통원, 처방조제비, 비급여 항목 보장 (비급여 자기부담금 20~30% 수준)</td>
+        </tr>
+        <tr>
+          <td><strong>비급여 특약</strong></td>
+          <td>도수치료, 비급여 주사제 등 특약 보장 가능 (특약 없는 상품도 많음)</td>
+          <td>비급여 항목을 3개 특약으로 분리하여 가입 가능</td>
+        </tr>
+        <tr>
+          <td><strong>보험료 인상 구조</strong></td>
+          <td>전체 가입자의 손해율에 따라 일괄 인상</td>
+          <td>비급여 이용량에 따라 개별적으로 인상/할인 적용 (차등제)</td>
+        </tr>
+        <tr>
+          <td><strong>만기 시점 고려사항</strong></td>
+          <td>높은 보험료 부담, 우수한 보장 유지 여부 고민</td>
+          <td>저렴한 보험료, 강화된 자기부담금 수용 여부 고민</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="mt-4"><strong>만기 재가입 결정 포인트:</strong> 1세대 실비보험 가입자는 건강이 양호하고 병원 이용이 적다면 4세대로 전환하여 보험료를 절감하는 것이 유리합니다. 하지만 지병이 있거나 비급여 진료를 자주 받는다면, 보장이 우수한 1세대 상품을 유지하는 것이 더 이득일 수 있습니다.</p>
+  </section>
+
+  <section id="strategy">
+    <h2>2026년 실비보험 만기 시점별 최적화 전략</h2>
+    <p>실비보험 만기 시점은 가입자의 연령대, 건강 상태, 그리고 재정 상황에 따라 전략이 달라져야 합니다. 2026년 기준으로 각 시나리오별 전문가의 조언을 참고하십시오.</p>
+
+    <h3>1. 만기 6개월 전: 건강 점검과 보험료 진단</h3>
+    <p>만기가 다가오면 가장 먼저 해야 할 일은 자신의 건강 상태를 점검하는 것입니다. 신규 가입 시 심사에 영향을 줄 수 있는 질병 이력이 없는지 확인하고, 필요하다면 만기 이전에 진료를 받는 것이 유리할 수도 있습니다. 동시에 현재 납부하는 보험료와 4세대 실손보험으로 전환 시 예상되는 보험료를 비교해야 합니다.</p>
+    <div class="form-group">
+      <label for="checkup">만기 전 건강 점검 필요성 체크리스트</label>
+      <input type="checkbox" id="check1"><label for="check1"> 최근 1년 이내 입원, 수술, 7일 이상 통원 치료 이력</label><br>
+      <input type="checkbox" id="check2"><label for="check2"> 5년 이내 11대 중대 질병 진단 이력</label><br>
+      <input type="checkbox" id="check3"><label for="check3"> 만성 질환(고혈압, 당뇨 등)으로 인한 정기적인 약물 복용 여부</label>
+    </div>
+
+    <h3>2. 만기 3개월 전: 재가입 vs. 전환 시뮬레이션</h3>
+    <p>건강 상태가 양호하다면, 4세대 실비보험으로 전환했을 때의 장점을 면밀히 시뮬레이션해야 합니다. 특히 <span class="highlight">2026년 실손보험 시장은 비급여 항목에 대한 심사가 더욱 강화될 것으로 예상</span>되므로, 4세대 실비보험의 비급여 차등제 적용을 이해하는 것이 중요합니다.</p>
+    <div class="data-box">
+        <h4>2026년 실비보험 비급여 이용량에 따른 보험료 차등제 예상 인상률</h4>
+        <p>비급여 이용량에 따라 다음 해 보험료가 100%~300%까지 인상될 수 있습니다. (예시) <br>비급여 지출이 없는 경우 5% 할인, 비급여 지출이 많은 경우 200% 할증.</p>
+    </div>
+
+    <h3>3. 만기 임박: 전문가 상담을 통한 최종 결정</h3>
+    <p>만기가 임박했을 때는 전문가와 상담하여 최종 결정을 내리는 것이 가장 안전합니다. 특히 기존 1~3세대 상품의 우수한 보장을 포기할지 여부는 신중하게 판단해야 합니다. <span class="highlight">유병력자나 노인층의 경우</span> 기존 상품을 유지하는 것이 절대적으로 유리할 수 있습니다.</p>
+    <div class="form-group">
+      <label for="decisionFactor">나의 만기 결정 핵심 요소는 무엇인가요?</label>
+      <select id="decisionFactor">
+        <option value="">-- 선택하세요 --</option>
+        <option value="premium">높은 보험료 부담 (보험료 절감 우선)</option>
+        <option value="coverage">보장 범위 축소 우려 (보장 유지 우선)</option>
+        <option value="health">건강 상태 악화 (유병력자 가입 고려)</option>
+        <option value="age">노후 대비 및 만기 시점 재정 상황</option>
+      </select>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2>실비보험 만기 관련 자주 묻는 질문 (FAQ)</h2>
+    <h3>Q1. 만기 시점에 건강이 나빠졌는데, 재가입이 가능한가요?</h3>
+    <p>A. 네, 실비보험은 재가입 시점에 가입자의 건강 상태와 관계없이 기존 계약을 이어갈 수 있습니다. 다만, 갱신이 아닌 재가입 시점에는 약관에 따라 보장 내용이 변경될 수 있습니다. 만약 갱신이 아닌 신규 가입(4세대 전환)을 원한다면 건강 심사가 필요합니다.</p>
+    <h3>Q2. 4세대 실손보험으로 전환하면 기존 실비보험의 보장이 사라지나요?</h3>
+    <p>A. 네, 기존 실비보험을 해지하고 4세대 실손보험으로 전환하면 새로운 계약이 시작됩니다. 기존 상품의 우수한 보장(예: 높은 보장 한도, 낮은 자기부담금)은 사라지고 4세대 약관이 적용됩니다. 전환 시에는 반드시 보장 내용의 변경 사항을 숙지해야 합니다.</p>
+    <h3>Q3. 실비보험 만기 시점은 언제인가요?</h3>
+    <p>A. 실비보험은 갱신 주기와 재가입 주기가 다릅니다. 재가입 주기는 보통 15년 단위로 설정되며, 이 시점에 계약을 이어갈지 결정합니다. 갱신 주기는 1년 또는 3년 단위로 보험료가 변경되는 주기를 의미합니다.</p>
+    <h3>Q4. 만기 시점에 별다른 조치를 취하지 않으면 어떻게 되나요?</h3>
+    <p>A. 대부분의 보험사는 만기 시점에 자동으로 재가입 절차가 진행됩니다. 하지만 만약 재가입을 원하지 않는다면 반드시 보험사에 해지 의사를 밝혀야 합니다. 다만, 재가입 시점의 약관 변경 내용을 충분히 확인하는 것이 좋습니다.</p>
+    <h3>Q5. 2026년 실비보험 시장 변화로 만기 시점에 어떤 영향을 받나요?</h3>
+    <p>A. 2026년에는 실손보험의 비급여 차등제가 더욱 정교해지고, 보험료 산정 방식에 대한 정부 가이드라인이 강화될 것으로 예상됩니다. 만기 시점에 4세대로의 전환을 고려한다면, 이러한 변화를 예측하고 전문가의 조언을 받아야 합니다.</p>
+  </section>
+
+  <section id="checklist">
+    <h2>실비보험 만기 대비 최종 점검 체크리스트</h2>
+    <p>만기가 다가오는 가입자를 위한 실질적인 행동 지침입니다. 다음 항목을 확인하여 최선의 결정을 내리세요.</p>
+    <div class="form-group">
+      <label for="reviewChecklist">만기 대비 체크리스트</label>
+      <input type="checkbox" id="item1"><label for="item1"> 가입한 실비보험의 정확한 만기일 및 재가입 주기를 확인했다.</label><br>
+      <input type="checkbox" id="item2"><label for="item2"> 최근 5년간의 병원 진료 기록(특히 비급여 항목)을 확인했다.</label><br>
+      <input type="checkbox" id="item3"><label for="item3"> 4세대 실손보험으로 전환했을 때 예상되는 보험료를 비교했다.</label><br>
+      <input type="checkbox" id="item4"><label for="item4"> 현재의 건강 상태를 고려하여 유병력자 실손보험 가입 가능성을 확인했다.</label><br>
+      <input type="checkbox" id="item5"><label for="item5"> 만기 시점의 약관 변경 사항(보장 축소 등)을 보험사에 문의했다.</label>
+    </div>
+  </section>
+
+  <section id="references">
+    <h2>신뢰할 수 있는 실비보험 정보 출처 (외부 사이트)</h2>
+    <p>실비보험 만기에 대한 정확한 정보는 공인된 기관을 통해 확인하는 것이 중요합니다. 다음은 실손보험 관련 정보를 얻을 수 있는 신뢰할 수 있는 외부 사이트 목록입니다.</p>
+    <div class="external-links">
+      <ul>
+        <li><a href="https://www.fss.or.kr/" target="_blank">금융감독원 (FSS)</a>: 보험 약관 및 소비자 보호 관련 공식 정보 제공</li>
+        <li><a href="https://www.nhis.or.kr/" target="_blank">국민건강보험공단</a>: 건강보험 보장 범위 및 급여 항목 정보 제공</li>
+        <li><a href="https://www.kidi.or.kr/" target="_blank">보험연구원 (KIRI)</a>: 보험 산업 관련 연구 보고서 및 통계 자료 제공</li>
+        <li><a href="https://www.kdic.or.kr/" target="_blank">예금보험공사 (KDIC)</a>: 보험사 파산 시 예금자보호 제도 안내</li>
+        <li><a href="https://namu.wiki/w/%EC%8B%A4%EC%86%90%EB%B3%B4%ED%97%98" target="_blank">나무위키 - 실손보험</a>: 실손보험의 역사 및 세대별 특징 정리 (정보 참고용)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="consultation">
+    <h2>나만의 실비보험 만기 맞춤 솔루션 받기</h2>
+    <p>복잡한 실비보험 만기, 갱신, 재가입 문제를 전문가와 함께 해결하세요. 고객님의 상황(건강 상태, 기존 가입 상품, 재정 상황)에 맞춰 최적의 솔루션을 제공해 드립니다. 아래 정보를 입력하시면 맞춤형 상담을 도와드립니다.</p>
+
+    <div class="form-group">
+      <label for="userName">성함</label>
+      <input type="text" id="userName" name="userName" required>
+    </div>
+
+    <div class="form-group">
+      <label for="userPhone">연락처</label>
+      <input type="text" id="userPhone" name="userPhone" required placeholder="예: 010-1234-5678">
+    </div>
+
+    <div class="form-group">
+      <label for="birthDate">생년월일</label>
+      <input type="text" id="birthDate" name="birthDate" placeholder="예: 19800101">
+    </div>
+
+    <div class="form-group">
+      <label>현재 가입하고 계신 실비보험 세대는?</label>
+      <input type="radio" id="gen1" name="generation" value="1세대"><label for="gen1">1세대 (2009년 8월 이전)</label><br>
+      <input type="radio" id="gen2" name="generation" value="2세대"><label for="gen2">2세대 (2009년 8월 ~ 2017년 3월)</label><br>
+      <input type="radio" id="gen3" name="generation" value="3세대"><label for="gen3">3세대 (2017년 4월 ~ 2021년 6월)</label><br>
+      <input type="radio" id="gen4" name="generation" value="4세대"><label for="gen4">4세대 (2021년 7월 이후)</label><br>
+      <input type="radio" id="genunknown" name="generation" value="모름"><label for="genunknown">잘 모르겠습니다</label>
+    </div>
+
+    <div class="form-group">
+      <label for="healthIssue">최근 5년 이내 치료 이력이 있으신가요? (질병명과 치료 내용을 간략히 적어주세요)</label>
+      <textarea id="healthIssue" name="healthIssue" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="consultationTime">희망 상담 시간대</label>
+      <select id="consultationTime" name="consultationTime">
+        <option value="">-- 선택하세요 --</option>
+        <option value="am">오전 (09:00~12:00)</option>
+        <option value="pm1">오후 (13:00~16:00)</option>
+        <option value="pm2">저녁 (17:00~20:00)</option>
+      </select>
+    </div>
+
+    <div class="text-center">
+      <a href="#" class="cta-btn" onclick="alert('상담 신청이 완료되었습니다. 전문가가 곧 연락드리겠습니다.'); return false;">상담 신청하기</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 실비보험 만기 가이드센터. All rights reserved.</p>
+    <p>본 페이지의 모든 정보는 실비보험 가입자에게 도움을 드리고자 제작되었으며, 특정 보험 상품의 권유가 아닙니다. 최종 결정은 전문가와 상담 후 신중하게 하십시오.</p>
+  </footer>
+
+  
